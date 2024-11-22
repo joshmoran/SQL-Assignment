@@ -1,6 +1,29 @@
 # SQL Assignment
+## Contents
+| Task | Section | 
+|:---:|:---:|
+| Task 1 | Create Database and Input Values into Database |
+| Task 2 | Simple Questions |
+| Task 3 | Moderate Questions |
+| Task 4 | Hard Questions |
+| Task 5 | SQL Functions |
+| Task 6 | Update and Delete Records | 
 
-# Simple Questions
+## Original 
+
+[Assignment Details](Assignment.pdf)
+
+## Things to note 
+
+> SQL Commands have been built and executed on MariaDB 10.11.6
+
+
+# Task 1 - Create Database and Input Values into Database
+I have created a .sql file containing the tables and data. So when the sql is inputted into MariaDB, all tables are created and all data is inserted.
+
+[SQL File](create_database_and_input_data.sql)
+
+# Task 2 - Simple Questions
 
 1. Retrieve the first 5 members from the Members table
 
@@ -183,7 +206,7 @@
 ![Simple - Question 30](img/simple-30.png)
 
 
-# Moderate Questions 
+# Task 3 - Moderate Questions 
 1. Count the number of breakdowns for each vehicle
 
 `select Vehicle_Registration, count(*) as 'Number of Breakdowns' from Breakdown group by Vehicle_Registration;`
@@ -244,4 +267,84 @@
 
 ![Medium - Question 10](img/medium-10.png)
 
-# Hard Questions 
+# Task 4 - Hard Questions 
+1. Retrieve a list of members along with their vehicles using a join
+
+`select concat( Members.First_Name, ' ', Members.Last_name) as 'Full Name', concat( Vehicles.Vehicle_Make, ' / ', Vehicles.Vehicle_Model ) as 'Make / Model' from Vehicles left join Members on Vehicles.FK_Member_ID = Members.Member_ID order by concat( Members.First_Name, ' ', Members.Last_name) asc;`
+
+![Hard - Question 1](img/hard-1.png)
+
+2. Retrieve breakdown details along with the respective member details using a join
+
+`select concat( Members.First_Name, ' ', Members.Last_name) as 'Full Name', Breakdown.Vehicle_Registration as 'Registration', Breakdown.Breakdown_Date as 'Date', Breakdown.Breakdown_Time as 'Time' from Breakdown right join Vehicles on Breakdown.Vehicle_Registration = Vehicles.Vehicle_Registration right join Members on Vehicles.FK_Member_ID = Members.Member_ID where Breakdown.Vehicle_Registration is not null order by Breakdown.Breakdown_Date asc, Breakdown.Breakdown_Time;`
+
+![Hard - Question 2](img/hard-2.png)
+
+3. Find members who own a vehicle but have never experienced a breakdown
+
+`select concat( Members.First_Name, ' ', Members.Last_name) as 'Full Name', Vehicles.Vehicle_Registration as 'Vehicles without any Breakdowns' from Members left join Vehicles on Members.Member_ID = Vehicles.FK_Member_ID left join Breakdown on Vehicles.Vehicle_Registration = Breakdown.Vehicle_Registration where Vehicles.Vehicle_Registration not in (select Vehicle_Registration from Breakdown group by Vehicle_Registration ) group by Vehicles.Vehicle_Registration;`
+
+![Hard - Question 3](img/hard-3.png)
+
+4. Retrieve vehicles along with the count of their breakdowns using a join and group by.
+
+`select count(Breakdown.Vehicle_Registration) as 'Breakdown Count', concat(Members.First_Name, ' ', Members.Last_name) as 'Full Name', concat( Vehicles.Vehicle_Make, ' / ', Vehicles.Vehicle_Model ) as 'Make / Model' from Breakdown left join Vehicles on Breakdown.Vehicle_Registration = Vehicles.Vehicle_Registration right join Members on Vehicles.FK_Member_ID = Members.Member_ID where Breakdown.Vehicle_Registration is not null group by Vehicles.Vehicle_Registration order by count(Breakdown.Vehicle_Registration) desc , concat(Members.First_Name, ' ', Members.Last_name);`
+
+![Hard - Question 4](img/hard-4.png)
+
+
+
+10. Retrieve the top 3 vehicles with the highest number of breakdowns, ordered by breakdown count
+
+`select count( Breakdown.Vehicle_Registration) as 'Number of incidents', concat( Vehicles.Vehicle_Make, ' / ', Vehicles.Vehicle_Model) as 'Make / Model' from Breakdown right join Vehicles on Breakdown.Vehicle_Registration = Vehicles.Vehicle_Registration group by Breakdown.Vehicle_Registration order by count( Breakdown.Vehicle_Registration) desc limit 3;`
+
+![Hard - Question 10](img/hard-10.png)
+
+# Task 5 - SQL Functions 
+
+## Objective 
+Research the following SQL Functions 
+> AVG 
+> MIN
+> MAX
+> SUM
+
+## AVG
+|  | Explanation |
+|:---:|:---:|
+| Definition | 
+| Example of use | 
+
+## MIN
+|  | Explanation |
+|:---:|:---:|
+| Definition | 
+| Example of use | 
+
+## Max
+|  | Explanation |
+|:---:|:---:|
+| Definition | 
+| Example of use | 
+
+## AVG 
+|  | Explanation |
+|:---:|:---:|
+| Definition | 
+| Example of use | 
+
+# Task 6 - Update and Delete Records
+
+## Update 3 in the engineers table
+
+`Update Engineers set First_Name = 'Oliver' where First_Name = 'Olivia';`
+
+`Update Engineers set Last_Name = 'Thompson' where First_Name = 'Ethan' and Engineer_ID = 1`
+
+`Update Engineers set First_Name = 'Josh', Last_Name = 'Kelly' where Engineer_ID = 4`
+
+## Delete 2 records in the breakdown table
+
+`Delete from Breakdowns where Breakdown_ID = 2;`
+
+`Delete from Breakdowns where Vehicle_Registration = 'XYZ5678';`
