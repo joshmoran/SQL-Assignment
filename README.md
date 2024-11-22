@@ -1,7 +1,7 @@
 # SQL Assignment
 ## Contents
 | Task | Section | 
-|:---:|:---:|
+|:---:|:---|
 | Task 1 | Create Database and Input Values into Database |
 | Task 2 | Simple Questions |
 | Task 3 | Moderate Questions |
@@ -11,7 +11,7 @@
 
 ## Original 
 
-[Assignment Details](Assignment.pdf)
+[Assignment Details](assignment.pdf)
 
 ## Things to note 
 
@@ -135,7 +135,7 @@ I have created a .sql file containing the tables and data. So when the sql is in
 
 19. Retrieve the youngest member in the Member table.
 
-`select concat( First_Name, ' ', Last_Name ) as 'Full Name', Min( Member_Age ) as 'Oldest Member' from Members where Member_Age = (select Min(Member_Age) from Members) order by Member_Age deSC limit 1;`
+`select concat( First_Name, ' ', Last_Name ) as 'Full Name', Min( Member_Age ) as 'Youngest Member' from Members where Member_Age = (select Min(Member_Age) from Members) order by Member_Age deSC limit 1;`
 
 ![Simple - Question 19](img/simple-19.png)
 
