@@ -311,27 +311,31 @@ Research the following SQL Functions
 
 ## AVG
 |  | Explanation |
-|:---:|:---:|
-| Definition | 
-| Example of use | 
+|:---:|:---|
+| Definition | A function to return the average value in a column |
+| Example of use | Select avg(Member_Age) from Members |
+| Returned Data | ![Average Value in Members](img/avg.png) | 
 
 ## MIN
 |  | Explanation |
-|:---:|:---:|
-| Definition | 
-| Example of use | 
+|:---:|:---|
+| Definition | A function used to return the minimum or smallest value of a column | 
+| Example of use | Select min(Member_Age) from Members | 
+| Returned Data | ![Minimum Value in Members](img/min.png) | 
 
 ## Max
 |  | Explanation |
-|:---:|:---:|
-| Definition | 
-| Example of use | 
+|:---:|:---|
+| Definition | A function used to return the maximum or largest value of a column |
+| Example of use | Select max(Member_Age) from Members | 
+| Returned Data | ![Maximum Value in Members](img/max.png) | 
 
-## AVG 
+## SUM 
 |  | Explanation |
-|:---:|:---:|
-| Definition | 
-| Example of use | 
+|:---:|:---|
+| Definition | A function used to return the total sum of a column | 
+| Example of use | Select sum(Member_Age) from Members
+| Returned Data | ![Sum Value in Members](img/sum.png) | 
 
 # Task 6 - Update and Delete Records
 
