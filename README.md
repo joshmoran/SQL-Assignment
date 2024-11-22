@@ -1,5 +1,7 @@
 # SQL Assignment
 
+# Simple Questions
+
 1. Retrieve the first 5 members from the Members table
 
 `select * from Members limit 5;`
@@ -179,3 +181,67 @@
 `select concat ( First_Name, ' ', Last_Name) as 'Full Name', Member_Age from Members order by Member_Age deSC limit 3;`
 
 ![Simple - Question 30](img/simple-30.png)
+
+
+# Moderate Questions 
+1. Count the number of breakdowns for each vehicle
+
+`select Vehicle_Registration, count(*) as 'Number of Breakdowns' from Breakdown group by Vehicle_Registration;`
+
+![Medium - Question 1](img/medium-1.png)
+
+
+2. Find members who own more than one vehicle
+
+`select count(Vehicles.FK_Member_ID) as 'Number of Cars', concat( First_Name, ' ', Last_Name) as 'Full Name' from Members right join  Vehicles on Members.Member_ID = Vehicles.FK_Member_ID group by Vehicles.FK_Member_ID having count( *) > 1 order by concat( First_Name, ' ', Last_Name) asc;`
+
+![Medium - Question 2](img/medium-2.png)
+
+3. Retrieve the total number of breakdowns handled by each engineer
+
+`select count(*) as 'Number of attended breakdowns', concat( Engineers.First_Name, ' ', Engineers.Last_Name ) as 'Engineer Name' from Breakdown right join Engineers on Breakdown.Engineer_ID = Engineers.Engineer_ID group by Breakdown.Engineer_ID;`
+
+![Medium - Question 3](img/medium-3.png)
+
+4. Group breakdowns by location and sort them by the total number of breakdowns in each location
+
+`select count(Breakdown_Location) as 'Number of Breakdowns', Breakdown_Location as 'Location' from Breakdown group by Breakdown_Location order by count(Breakdown_Location) desc;`
+
+![Medium - Question 4](img/medium-4.png)
+
+5. List vehicles owned by members who are younger than 30 years
+
+`select concat( Vehicles.Vehicle_Make, ' ', Vehicles.Vehicle_Model ) as 'Make / Model', concat (Members.First_Name, ' ', Members.Last_name) as 'Full Name', Members.Member_Age from Members   right join Vehicles on Vehicles.FK_Member_ID = Members.Member_ID where Members.Member_Age < 30;`
+
+![Medium - Question 5](img/medium-5.png)
+
+6. Retrieve all breakdowns and sort them by time in descending order (order by date, time)
+
+`select * from Breakdown order by Breakdown_Date desc, Breakdown_Time;`
+
+![Medium - Question 6](img/medium-6.png)
+
+7. Find all breakdowns for vehicles owned by members who live in New York
+`select concat( Members.First_Name, ' ', Members.Last_name) as 'Full Name', concat( Vehicles.Vehicle_Make, '/', Vehicles.Vehicle_Model ) as 'Make / model', Members.Member_Location as 'Home Location', Vehicles.Vehicle_Registration as 'Vehicle Registration', Breakdown.Breakdown_ID from Breakdown right join Vehicles on Breakdown.Vehicle_Registration = Vehicles.Vehicle_Registration right join Members on Vehicles.FK_Member_ID = Members.Member_ID where Members.Member_Location = 'New York' group by Vehicles.Vehicle_Registration;`
+    
+![Medium - Question 7](img/medium-7.png)
+
+8. Retrieve members who do not own any vehicles
+
+`select concat( Members.First_Name, ' ', Members.Last_name) as 'Owners with no cars' from Vehicles right join Members on Vehicles.FK_Member_ID = Members.Member_ID where Vehicles.Vehicle_Registration is NULL;`
+
+![Medium - Question 8](img/medium-8.png)
+
+9. Find breakdowns that occurred in the same city where the vehicle owner resides
+
+`select concat( Members.First_Name, ' ', Members.Last_name) as 'Full Name', Members.Member_Location as 'Accidents around home address' from Breakdown left join Vehicles on Breakdown.Vehicle_Registration = Vehicles.Vehicle_Registration left join Members on Breakdown.Breakdown_ID where Members.Member_Location = Breakdown.Breakdown_Location group by concat( Members.First_Name, ' ', Members.Last_name);`
+
+![Medium - Question 9](img/medium-9.png)
+
+10. Retrieve the total number of breakdowns handled by each engineer during 2024
+
+`Select concat(Engineers.First_Name, ' ', Engineers.Last_Name) as 'Engineers Name', count(Breakdown.Engineer_ID) as 'Breakdown Handled' from Breakdown right join Engineers on Breakdown.Engineer_ID = Engineers.Engineer_ID group by concat(Engineers.First_Name, ' ', Engineers.Last_Name);`
+
+![Medium - Question 10](img/medium-10.png)
+
+# Hard Questions 
