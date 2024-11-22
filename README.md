@@ -3,7 +3,7 @@
 1. Retrieve the first 5 members from the Members table
 
 `select * from Members limit 5;`
-
+![Simple - Question 1](img/simple-01.png)
 
 2. Retrieve 5 members starting from the 6th row
 
