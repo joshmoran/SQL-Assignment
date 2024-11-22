@@ -292,7 +292,40 @@ I have created a .sql file containing the tables and data. So when the sql is in
 
 ![Hard - Question 4](img/hard-4.png)
 
+5. Find members whose vehicles have broken down more than twice.
 
+``
+
+![Hard - Question 5](img/hard-5.png)
+
+
+6. Retrieve breakdowns where multiple vehicles broke down on the same day.
+
+``
+
+![Hard - Question 6](img/hard-6.png)
+
+
+7. Count the total breakdowns handled by each engineer and label those who handled more than 5
+
+> breakdowns as 'Expert' and others as 'Beginner' using a CASE expression
+
+``
+
+![Hard - Question 7](img/hard-7.png)
+
+
+8. List all vehicles that have never had a breakdown using a subquery.
+
+``
+
+![Hard - Question 8](img/hard-8.png)
+
+9. Find the average age of members whose vehicles have experienced at least one breakdown.
+
+``
+
+![Hard - Question 9](img/hard-9.png)
 
 10. Retrieve the top 3 vehicles with the highest number of breakdowns, ordered by breakdown count
 
@@ -347,9 +380,9 @@ Research the following SQL Functions
 
 `Update Engineers set First_Name = 'Oliver' where First_Name = 'Olivia';`
 
-`Update Engineers set Last_Name = 'Thompson' where First_Name = 'Ethan' and Engineer_ID = 1`
+`Update Engineers set Last_Name = 'Thompson' where First_Name = 'Ethan' and Engineer_ID = 1;`
 
-`Update Engineers set First_Name = 'Josh', Last_Name = 'Kelly' where Engineer_ID = 4`
+`Update Engineers set First_Name = 'Josh', Last_Name = 'Kelly' where Engineer_ID = 4;`
 
 ## Delete 2 records in the breakdown table
 
