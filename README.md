@@ -305,9 +305,13 @@ I have created a .sql file containing the tables and data. So when the sql is in
 ## Objective 
 Research the following SQL Functions 
 > AVG 
+
 > MIN
+
 > MAX
+
 > SUM
+
 
 ## AVG
 |  | Explanation |
