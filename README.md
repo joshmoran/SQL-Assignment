@@ -294,14 +294,14 @@ I have created a .sql file containing the tables and data. So when the sql is in
 
 5. Find members whose vehicles have broken down more than twice.
 
-``
+`select concat( Members.First_Name, ' ', Members.Last_name ) as 'Full Name', count(Breakdown.Vehicle_Registration) as 'Number of Breakdown' from Vehicles left join Members on Vehicles.FK_Member_ID = Members.Member_ID right join Breakdown on Vehicles.Vehicle_Registration = Breakdown.Vehicle_Registration group by Members.Member_ID having count( Breakdown.Vehicle_Registration ) > 2;`
 
 ![Hard - Question 5](img/hard-5.png)
 
 
 6. Retrieve breakdowns where multiple vehicles broke down on the same day.
 
-``
+`select count(Breakdown.Breakdown_Date) as 'Number of Events', Breakdown.Breakdown_Date from Vehicles left join Members on Vehicles.FK_Member_ID = Members.Member_ID right join Breakdown on Vehicles.Vehicle_Registration = Breakdown.Vehicle_Registration group by Breakdown.Breakdown_Date having count( Breakdown.Breakdown_Date ) > 1;`
 
 ![Hard - Question 6](img/hard-6.png)
 
@@ -310,20 +310,20 @@ I have created a .sql file containing the tables and data. So when the sql is in
 
 > breakdowns as 'Expert' and others as 'Beginner' using a CASE expression
 
-``
+`select concat ( Engineers.First_Name, ' ', Engineers.Last_Name ) as 'Engineers Name', count( Breakdown.Engineer_ID ) as 'Number of Jobs', case when Count( Engineers.Engineer_ID ) > 5 then 'Expert Engineer' else 'Beginner Engineer' end as 'Skill Level' from Breakdown right join Engineers on Breakdown.Engineer_ID = Engineers.Engineer_ID group by ( Engineers.Engineer_ID );`
 
 ![Hard - Question 7](img/hard-7.png)
 
 
 8. List all vehicles that have never had a breakdown using a subquery.
 
-``
+`select concat ( Members.First_Name, ' ', Members.Last_name ) as 'Full Name', Vehicles.Vehicle_Registration as 'Registation', concat( Vehicles.Vehicle_Make, ' / ', Vehicles.Vehicle_Model ) as 'Make / Model' from Vehicles right join Members on Vehicles.FK_Member_ID = Members.Member_ID left join Breakdown on Vehicles.Vehicle_Registration = Breakdown.Vehicle_Registration where Vehicles.Vehicle_Registration not in ( select Vehicle_Registration from Breakdown);`
 
 ![Hard - Question 8](img/hard-8.png)
 
 9. Find the average age of members whose vehicles have experienced at least one breakdown.
 
-``
+`select avg( Members.Member_Age) as 'Average Age', count( Breakdown.Breakdown_ID) as 'Number of Breakdowns over 1' from Vehicles right join Members on Vehicles.FK_Member_ID = Members.Member_ID left join Breakdown on Vehicles.Vehicle_Registration = Breakdown.Vehicle_Registration having count( Breakdown.Breakdown_ID) > 1;`
 
 ![Hard - Question 9](img/hard-9.png)
 
